@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2007.EXE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="bootScreen">
+
+  <div class="bootBox">
+
+    <div class="bootLogo">Windows</div>
+
+    <div class="bootTitle">
+      2007.EXE
+    </div>
+
+    <div class="bootText">
+      SYSTEM RESTORATION
+    </div>
+
+    <div class="bootProgress">
+      <div id="bootProgress"></div>
+    </div>
+
+    <div id="bootStatus">
+      INITIALIZING...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- DESKTOP -->
+
+<div id="desktop">
+
+  <!-- TOP BAR -->
+
+  <div class="topBar">
+
+    <div class="startButton">
+      <span>⊞</span>
+      START
+    </div>
+
+    <div class="windowTitle">
+      2007.EXE
+    </div>
+
+    <div class="systemTime" id="systemTime">
+      03:17 AM
+    </div>
+
+  </div>
+
+
+  <!-- DESKTOP ICONS -->
+
+  <div class="desktopIcons">
+
+    <button class="desktopIcon" onclick="openWindow('computerWindow')">
+      <span>💻</span>
+      <small>My Computer</small>
+    </button>
+
+    <button class="desktopIcon" onclick="openWindow('internetWindow')">
+      <span>🌐</span>
+      <small>Internet</small>
+    </button>
+
+    <button class="desktopIcon" onclick="openWindow('musicWindow')">
+      <span>🎵</span>
+      <small>MP3 Player</small>
+    </button>
+
+    <button class="desktopIcon" onclick="openWindow('msnWindow')">
+      <span>💬</span>
+      <small>MSN</small>
+    </button>
+
+    <button class="desktopIcon" onclick="openWindow('cameraWindow')">
+      <span>📷</span>
+      <small>Camera</small>
+    </button>
+
+    <button class="desktopIcon" onclick="openWindow('gamesWindow')">
+      <span>🕹️</span>
+      <small>Games</small>
+    </button>
+
+  </div>
+
+
+  <!-- COMPUTER -->
+
+  <div class="window" id="computerWindow">
+
+    <div class="windowHeader">
+
+      <span>💻 My Computer</span>
+
+      <div>
+        <button onclick="minimizeWindow('computerWindow')">_</button>
+        <button onclick="closeWindow('computerWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="windowContent fileExplorer">
+
+      <h3>MY COMPUTER</h3>
+
+      <div class="filesGrid">
+
+        <button onclick="showFile('Music folder')">
+          🎵
+          <span>Music</span>
+        </button>
+
+        <button onclick="showFile('Photos folder')">
+          🖼️
+          <span>Photos</span>
+        </button>
+
+        <button onclick="showFile('Downloads folder')">
+          📥
+          <span>Downloads</span>
+        </button>
+
+        <button onclick="showFile('Chat Logs folder')">
+          💬
+          <span>Chat Logs</span>
+        </button>
+
+        <button onclick="showFile('Documents folder')">
+          📄
+          <span>Documents</span>
+        </button>
+
+        <button onclick="systemFile()">
+          ⚠️
+          <span>System</span>
+        </button>
+
+        <button id="unknownFolder" onclick="unknownFile()">
+          🔒
+          <span>UNKNOWN</span>
+        </button>
+
+      </div>
+
+      <div id="fileMessage" class="fileMessage">
+        Select a folder.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- INTERNET -->
+
+  <div class="window" id="internetWindow">
+
+    <div class="windowHeader">
+
+      <span>🌐 Internet Explorer</span>
+
+      <div>
+        <button onclick="closeWindow('internetWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="browser">
+
+      <div class="addressBar">
+
+        <span>Address</span>
+
+        <input
+          id="urlInput"
+          value="http://www.internet.com"
+        >
+
+        <button onclick="loadWebsite()">
+          GO
+        </button>
+
+      </div>
+
+      <div id="browserPage" class="browserPage">
+
+        <h1>WELCOME TO THE INTERNET</h1>
+
+        <p>
+          You've successfully connected.
+        </p>
+
+        <hr>
+
+        <div class="webLinks">
+
+          <button onclick="website('nightwire')">
+            NIGHTWIRE
+          </button>
+
+          <button onclick="website('tokyo')">
+            TOKYO-NIGHTS
+          </button>
+
+          <button onclick="website('mp3')">
+            MP3-VAULT
+          </button>
+
+          <button onclick="website('chat')">
+            CHATROOM
+          </button>
+
+          <button onclick="website('lost')">
+            LOST & FOUND
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MUSIC -->
+
+  <div class="window" id="musicWindow">
+
+    <div class="windowHeader">
+
+      <span>🎵 Windows Media Player</span>
+
+      <div>
+        <button onclick="closeWindow('musicWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="musicPlayer">
+
+      <div class="albumArt">
+        2007
+      </div>
+
+      <div class="songInfo">
+
+        <h2 id="songName">
+          NIGHT DRIVE.mp3
+        </h2>
+
+        <p id="artistName">
+          UNKNOWN ARTIST
+        </p>
+
+      </div>
+
+      <div class="musicControls">
+
+        <button onclick="previousSong()">⏮</button>
+
+        <button id="playButton" onclick="toggleMusic()">
+          ▶
+        </button>
+
+        <button onclick="nextSong()">⏭</button>
+
+      </div>
+
+      <div class="musicProgress">
+
+        <div id="musicProgress"></div>
+
+      </div>
+
+      <div class="trackList">
+
+        <button onclick="selectSong(0)">
+          01 — NIGHT DRIVE
+        </button>
+
+        <button onclick="selectSong(1)">
+          02 — AFTER MIDNIGHT
+        </button>
+
+        <button onclick="selectSong(2)">
+          03 — TOKYO RAIN
+        </button>
+
+        <button onclick="selectSong(3)">
+          04 — UNKNOWN
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MSN -->
+
+  <div class="window" id="msnWindow">
+
+    <div class="windowHeader">
+
+      <span>💬 MSN Messenger</span>
+
+      <div>
+        <button onclick="closeWindow('msnWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="msn">
+
+      <div class="contacts">
+
+        <h3>CONTACTS</h3>
+
+        <button onclick="openChat('neonboy')">
+          🟢 neonboy
+        </button>
+
+        <button onclick="openChat('angel.exe')">
+          🟢 angel.exe
+        </button>
+
+        <button onclick="openChat('tokyo_97')">
+          🟡 tokyo_97
+        </button>
+
+        <button onclick="openChat('offline')">
+          ⚪ offline
+        </button>
+
+        <button onclick="openChat('unknown')">
+          ❓ unknown_user
+        </button>
+
+      </div>
+
+      <div class="chatBox">
+
+        <div id="chatTitle">
+          SELECT A CONTACT
+        </div>
+
+        <div id="messages">
+
+        </div>
+
+        <div class="chatInput">
+
+          <input
+            id="messageInput"
+            placeholder="Type a message..."
+          >
+
+          <button onclick="sendMessage()">
+            SEND
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CAMERA -->
+
+  <div class="window" id="cameraWindow">
+
+    <div class="windowHeader">
+
+      <span>📷 Digital Camera</span>
+
+      <div>
+        <button onclick="closeWindow('cameraWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="camera">
+
+      <div class="cameraScreen">
+
+        <div class="cameraDate">
+          08/24/2007
+        </div>
+
+        <div class="cameraCross">
+          +
+        </div>
+
+        <div class="cameraTime">
+          03:17 AM
+        </div>
+
+      </div>
+
+      <button onclick="takePhoto()">
+        TAKE PHOTO
+      </button>
+
+      <div id="photoMessage">
+        NO PHOTOS TAKEN
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- GAMES -->
+
+  <div class="window" id="gamesWindow">
+
+    <div class="windowHeader">
+
+      <span>🕹️ Games</span>
+
+      <div>
+        <button onclick="closeWindow('gamesWindow')">X</button>
+      </div>
+
+    </div>
+
+    <div class="games">
+
+      <h2>GAMES</h2>
+
+      <button onclick="startSnake()">
+        🐍 Snake
+      </button>
+
+      <button onclick="startMinesweeper()">
+        💣 Minesweeper
+      </button>
+
+      <button onclick="startMysteryGame()">
+        ❓ UNKNOWN.EXE
+      </button>
+
+      <div id="gameScreen">
+
+        SELECT A GAME
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- START MENU -->
+
+  <div id="startMenu">
+
+    <h2>2007.EXE</h2>
+
+    <button onclick="openWindow('computerWindow')">
+      💻 My Computer
+    </button>
+
+    <button onclick="openWindow('internetWindow')">
+      🌐 Internet
+    </button>
+
+    <button onclick="openWindow('musicWindow')">
+      🎵 Music
+    </button>
+
+    <button onclick="openWindow('msnWindow')">
+      💬 MSN
+    </button>
+
+    <hr>
+
+    <button onclick="shutdown()">
+      ⏻ Shut Down
+    </button>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
