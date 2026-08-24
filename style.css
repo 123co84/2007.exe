@@ -1,0 +1,575 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  overflow: hidden;
+  background: #050505;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+#bootScreen {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.bootBox {
+  width: 420px;
+  text-align: center;
+}
+
+.bootLogo {
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.bootTitle {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.bootText {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.bootProgress {
+  height: 18px;
+  background: #222;
+  border: 1px solid #777;
+  overflow: hidden;
+}
+
+#bootProgress {
+  height: 100%;
+  width: 0%;
+  background: #777;
+  transition: width .15s linear;
+}
+
+#bootStatus {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+#desktop {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(circle at 50% 30%, #182438, #07101c 55%, #02040a);
+  color: white;
+  position: relative;
+}
+
+#desktop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      rgba(255,255,255,.025) 50%,
+      transparent 50%
+    );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+.topBar {
+  height: 38px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(#3e526a, #182435);
+  border-top: 1px solid #7790a8;
+  display: flex;
+  align-items: center;
+  z-index: 5000;
+}
+
+.startButton {
+  height: 100%;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(#607991, #26384c);
+  border-right: 1px solid #8ca0b5;
+  font-weight: bold;
+}
+
+.startButton:hover {
+  background: #6b829a;
+}
+
+.windowTitle {
+  flex: 1;
+  padding-left: 15px;
+  font-size: 13px;
+}
+
+.systemTime {
+  padding: 0 18px;
+  font-size: 12px;
+}
+
+.desktopIcons {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.desktopIcon {
+  width: 95px;
+  background: transparent;
+  border: none;
+  color: white;
+  text-shadow: 1px 1px #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+}
+
+.desktopIcon span {
+  font-size: 34px;
+}
+
+.desktopIcon small {
+  font-size: 12px;
+}
+
+.desktopIcon:hover {
+  background: rgba(100,150,200,.25);
+}
+
+.window {
+  position: absolute;
+  width: min(760px, 90vw);
+  min-height: 420px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #d7d7d7;
+  color: #111;
+  border: 2px solid #6d7f91;
+  box-shadow: 8px 8px 25px rgba(0,0,0,.65);
+  display: none;
+  z-index: 100;
+}
+
+.windowHeader {
+  height: 31px;
+  background: linear-gradient(#56718c, #263c53);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px 0 9px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.windowHeader button {
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid #314354;
+  background: #c5ccd2;
+  color: #111;
+}
+
+.windowContent {
+  padding: 20px;
+  min-height: 380px;
+}
+
+.fileExplorer h3 {
+  margin-top: 0;
+}
+
+.filesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.filesGrid button {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.filesGrid button:hover {
+  background: #c0d4e8;
+  border: 1px dotted #345;
+}
+
+.filesGrid button:first-child {
+  font-size: 12px;
+}
+
+.filesGrid button::first-letter {
+  font-size: 30px;
+}
+
+.fileMessage {
+  margin-top: 25px;
+  border-top: 1px solid #999;
+  padding-top: 12px;
+  font-family: monospace;
+}
+
+.browser {
+  background: #fff;
+  min-height: 390px;
+}
+
+.addressBar {
+  height: 45px;
+  background: #d5d5d5;
+  border-bottom: 1px solid #999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+}
+
+.addressBar input {
+  flex: 1;
+  height: 28px;
+}
+
+.addressBar button {
+  height: 28px;
+}
+
+.browserPage {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  color: #111;
+}
+
+.browserPage h1 {
+  font-size: 28px;
+}
+
+.webLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+}
+
+.webLinks button {
+  text-align: left;
+  background: white;
+  border: none;
+  color: #001a99;
+  text-decoration: underline;
+}
+
+.musicPlayer {
+  background: linear-gradient(#17232f, #05080c);
+  min-height: 390px;
+  padding: 25px;
+  color: white;
+}
+
+.albumArt {
+  width: 170px;
+  height: 170px;
+  background:
+    linear-gradient(135deg, #151515, #384e65);
+  border: 2px solid #71849a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin: auto;
+}
+
+.songInfo {
+  text-align: center;
+}
+
+.songInfo h2 {
+  font-size: 17px;
+}
+
+.songInfo p {
+  color: #aab8c5;
+}
+
+.musicControls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.musicControls button {
+  border: 1px solid #7e91a5;
+  background: #293b4e;
+  color: white;
+  width: 50px;
+  height: 35px;
+}
+
+.musicProgress {
+  height: 6px;
+  background: #333;
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+#musicProgress {
+  height: 100%;
+  width: 0%;
+  background: #a8c3da;
+}
+
+.trackList {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.trackList button {
+  background: #111b25;
+  color: #dce8f2;
+  border: none;
+  border-bottom: 1px solid #334656;
+  text-align: left;
+  padding: 10px;
+}
+
+.trackList button:hover {
+  background: #273b4e;
+}
+
+.msn {
+  display: flex;
+  height: 390px;
+}
+
+.contacts {
+  width: 200px;
+  background: #eef2f5;
+  border-right: 1px solid #aaa;
+  padding: 12px;
+}
+
+.contacts h3 {
+  font-size: 12px;
+}
+
+.contacts button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 9px;
+}
+
+.contacts button:hover {
+  background: #ccdcea;
+}
+
+.chatBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatTitle {
+  padding: 12px;
+  background: #e2e8ed;
+  border-bottom: 1px solid #aaa;
+  font-weight: bold;
+}
+
+#messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: white;
+}
+
+.message {
+  margin-bottom: 12px;
+}
+
+.message b {
+  color: #345d85;
+}
+
+.chatInput {
+  display: flex;
+  padding: 8px;
+  background: #ddd;
+  gap: 5px;
+}
+
+.chatInput input {
+  flex: 1;
+  padding: 7px;
+}
+
+.camera {
+  background: #101820;
+  min-height: 390px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.cameraScreen {
+  width: 90%;
+  height: 270px;
+  background:
+    radial-gradient(circle, #304c54, #101719);
+  border: 5px solid #333;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cameraDate {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 12px;
+}
+
+.cameraTime {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.cameraCross {
+  font-size: 35px;
+}
+
+.camera > button {
+  margin-top: 15px;
+  padding: 10px 25px;
+}
+
+#photoMessage {
+  margin-top: 10px;
+  font-family: monospace;
+}
+
+.games {
+  min-height: 390px;
+  padding: 20px;
+  background: #ececec;
+}
+
+.games > button {
+  padding: 10px;
+  margin-right: 8px;
+}
+
+#gameScreen {
+  margin-top: 25px;
+  min-height: 240px;
+  border: 2px inset #aaa;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  font-family: monospace;
+}
+
+#startMenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 38px;
+  width: 300px;
+  background: #d8d8d8;
+  color: #111;
+  border: 2px solid #555;
+  box-shadow: 5px 5px 20px #000;
+  z-index: 9000;
+  padding: 10px;
+}
+
+#startMenu h2 {
+  margin: -10px -10px 10px;
+  padding: 20px;
+  background: linear-gradient(#56718c, #263c53);
+  color: white;
+}
+
+#startMenu button {
+  width: 100%;
+  padding: 12px;
+  text-align: left;
+  background: transparent;
+  border: none;
+}
+
+#startMenu button:hover {
+  background: #bfd1e1;
+}
+
+@media (max-width: 700px) {
+
+  .desktopIcons {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    gap: 12px;
+  }
+
+  .window {
+    width: 96vw;
+    height: 75vh;
+    min-height: 0;
+  }
+
+  .filesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .msn {
+    height: calc(75vh - 31px);
+  }
+
+  .contacts {
+    width: 130px;
+  }
+
+  .topBar .windowTitle {
+    display: none;
+  }
+
+}
